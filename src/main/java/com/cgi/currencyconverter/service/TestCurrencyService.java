@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.util.*;
 
 @Service
-public class CurrencyConverterService implements CurrencyConverterServiceImpl {
+public class TestCurrencyService implements TestCurrencyImpl {
 
     @Value("${rapidapi.host}")
     private String rapidapiHost;
@@ -34,7 +34,7 @@ public class CurrencyConverterService implements CurrencyConverterServiceImpl {
 
     private final CurrencyRepository currencyRepository;
 
-    public CurrencyConverterService(RestTemplateBuilder restTemplateBuilder, CurrencyRepository currencyRepository) {
+    public TestCurrencyService(RestTemplateBuilder restTemplateBuilder, CurrencyRepository currencyRepository) {
         // Initialize the RestTemplate using RestTemplateBuilder
         this.restTemplate = restTemplateBuilder.build();
         this.currencyRepository = currencyRepository;

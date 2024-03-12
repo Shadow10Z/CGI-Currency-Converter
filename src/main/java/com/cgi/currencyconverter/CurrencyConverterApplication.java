@@ -35,6 +35,7 @@ public class CurrencyConverterApplication extends SpringBootServletInitializer {
                 .orElse("/");
         String hostAddress = "localhost";
         String swaggerPath = "swagger-ui/index.html";
+        String h2 = "h2-console";
         try {
             hostAddress = InetAddress.getLocalHost().getHostAddress();
         } catch (UnknownHostException e) {
@@ -49,6 +50,7 @@ public class CurrencyConverterApplication extends SpringBootServletInitializer {
                         \tLocal: \t\t{}://localhost:{}{}
                         \tExternal: \t{}://{}:{}{}
                         \tSwagger-UI: {}://localhost:{}{}{}
+                        \tH2-Console: {}://localhost:{}{}{}
                         \tProfile(s): \t{}
                         ----------------------------------------------------------""",
                 applicationName,
@@ -63,6 +65,10 @@ public class CurrencyConverterApplication extends SpringBootServletInitializer {
                 serverPort,
                 contextPath,
                 swaggerPath,
+                protocol,
+                serverPort,
+                contextPath,
+                h2,
                 env.getActiveProfiles().length == 0 ? env.getDefaultProfiles() : env.getActiveProfiles()
         );
     }

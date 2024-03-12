@@ -6,7 +6,7 @@ import com.cgi.currencyconverter.dto.currency.CurrencyDTO;
 import java.util.List;
 import java.util.Optional;
 
-public interface CurrencyConverterServiceImpl {
+public interface TestCurrencyImpl {
 
     List<String> getCurrencyQuotesList();
 

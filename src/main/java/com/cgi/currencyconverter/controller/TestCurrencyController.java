@@ -2,6 +2,7 @@ package com.cgi.currencyconverter.controller;
 
 import com.cgi.currencyconverter.controller.errors.BadRequestAlertException;
 import com.cgi.currencyconverter.controller.errors.CurrencyQuoteNoteFound;
+import com.cgi.currencyconverter.service.TestCurrencyService;
 import jakarta.validation.Path;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,40 +26,40 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/currency-converter")
-public class CurrencyConverterController {
-    private final Logger log = LoggerFactory.getLogger(CurrencyConverterController.class);
+public class TestCurrencyController {
+    private final Logger log = LoggerFactory.getLogger(TestCurrencyController.class);
 
     private static final String ENTITY_NAME = "currency";
 
-    private final CurrencyConverterService currencyConverterService;
+    private final TestCurrencyService testCurrencyService;
 
-    public CurrencyConverterController(CurrencyConverterService currencyConverterService) {
-        this.currencyConverterService = currencyConverterService;
+    public TestCurrencyController(TestCurrencyService testCurrencyService) {
+        this.testCurrencyService = testCurrencyService;
     }
 
     @GetMapping("/currency-quotes")
     public String getCurrencyQuotes() {
-        return currencyConverterService.getCurrencyQuotesList().toString();
+        return testCurrencyService.getCurrencyQuotesList().toString();
     }
 
     @GetMapping("/exchange-rate")
-    public String getCurrencyExchange(@Param("from") String from, @Param("to") String to){
-        return currencyConverterService.getCurrencyExchange(from, to).toString();
+    public String testCurrencyExchange(@Param("from") String from, @Param("to") String to){
+        return testCurrencyService.getCurrencyExchange(from, to).toString();
     }
 
     @GetMapping("/currency-code")
     public String getCurrencyByCode(@Param("code") String code){
-        return currencyConverterService.getCurrencyByCode(code).toString();
+        return testCurrencyService.getCurrencyByCode(code).toString();
     }
 
     @GetMapping("/currency-name")
     public String getCurrencyByName(@Param("name") String name){
-        return currencyConverterService.getCurrencyByName(name).toString();
+        return testCurrencyService.getCurrencyByName(name).toString();
     }
 
     @DeleteMapping("/currency-delete/{code}")
     public String deleteCurrencyByCode(@PathVariable("code") String code){
-        return currencyConverterService.deleteCurrencyByCode(code).toString();
+        return testCurrencyService.deleteCurrencyByCode(code).toString();
     }
 
     @PutMapping("/currency-update/{code}")
@@ -66,7 +67,7 @@ public class CurrencyConverterController {
             @PathVariable("code") String code,
             @RequestBody int newRate
     ){
-        return currencyConverterService.updateCurrencyByCode(code, newRate).toString();
+        return testCurrencyService.updateCurrencyByCode(code, newRate).toString();
     }
 
     @PostMapping("/save")
@@ -77,7 +78,7 @@ public class CurrencyConverterController {
                 throw new BadRequestAlertException("A new Currency cannot already have an ID", ENTITY_NAME, "idexists");
             }
 
-            Optional<CurrencyDTO> createdCurrency = currencyConverterService.createCurrency(currencyDTO);
+            Optional<CurrencyDTO> createdCurrency = testCurrencyService.createCurrency(currencyDTO);
 
             if (createdCurrency.isPresent()) {
                 CurrencyDTO currency = createdCurrency.get();
